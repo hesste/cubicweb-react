@@ -1,0 +1,14 @@
+{
+  "name": "cw-react",
+  "version": "0.1.0",
+  "description": "js app built with react and cubicweb as data repo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hesster",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^0.13.3"
+  }
+}
