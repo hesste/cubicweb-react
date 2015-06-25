@@ -5,13 +5,13 @@ var http = require('http');
 function proxy(client_req, client_res) {
 
     var options = {
-        hostname: 'localhost',
-        port: '8000',
-        path: client_req.url.replace(/^\/cw/, '')
+        hostname: 'debian',
+        port: '8080',
+        path: client_req.url,//.replace(/^\/cw/, '')
+        headers: client_req.headers
     };
 
     http.request(options, function(res) {
-        console.log('res headers', res.headers)
         copyHeaders(res, client_res);
         res.pipe(client_res);
     }).end();
@@ -20,7 +20,8 @@ function proxy(client_req, client_res) {
 function copyHeaders(reqFrom, reqTo) {
     var headersOfInterest = ['date', 'content-type',
                              'content-length',
-                             'date', 'last-modified'];
+                             'date', 'last-modified',
+                             'set-cookie'];
     var headersFrom = reqFrom.headers;
     for (var i = 0, header ; header = headersOfInterest[i] ; i++ ) {
         if (header in headersFrom) {

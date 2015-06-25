@@ -8,7 +8,7 @@ var publicPath = fsPath.join(__dirname, '..', 'public');
 var mimetypes = {
     '.js': 'application/javascript',
     '.txt': 'text/plain'
-}
+};
 
 function servePublicFile(relativePath, httpRes) {
     var path = fsPath.join(publicPath, relativePath);
@@ -29,7 +29,7 @@ function servePublicFile(relativePath, httpRes) {
             });
             httpRes.end(body);
         }
-    })
+    });
 }
 
 module.exports = servePublicFile;

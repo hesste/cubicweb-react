@@ -16,8 +16,8 @@ module.exports = React.createClass({
             h1(null, 'TOTO'),
             ul(null, this.props.data.map(function(post) {
                 return li(
-                    {key: post.id},
-                    a({href: '/post/' + post.id, onClick: this.props.onClick},
+                    {key: post.eid},
+                    a({href: '/post/' + post.eid, onClick: this.props.onClick},
                       post.title)
                 );
             }.bind(this)))

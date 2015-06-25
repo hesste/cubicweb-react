@@ -11,11 +11,11 @@ var DOM = React.DOM,
 
 module.exports = React.createClass({
     render: function render() {
-        var post = this.props.data;
+        var post = this.props.data[0];
         return div(
             null,
             h1(null, post.title),
-            p(null, post.body),
+            p(null, post.content),
             p(null, a({href: '/', onClick: this.props.onClick}, 'back home'))
         );
     }

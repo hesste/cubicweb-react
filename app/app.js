@@ -1,8 +1,18 @@
+/* global Promise */
 'use strict';
 
 var React = require('react');
 
+
+var DOM = React.DOM,
+    header = DOM.header,
+    div = DOM.div,
+    section = DOM.section;
+
+
 var router = require('./router'),
+    headerApp = require('./header'),
+    appStates = require('./states'),
     db = require('./db');
 
 
@@ -35,24 +45,49 @@ var App = React.createClass({
 
     render: function render() {
         var route = this.props.route;
-        return React.createElement(route.component,
-                                   {data: route.data,
-                                    onClick: this.handleClick});
+        
+        var style = {
+            marginTop: '20px',
+            marginBottom: '20px',
+            borderRadius: '4px',
+            boxShadow: 'rgba(0,0,0,0.8) 1px 1px 6px',
+            padding: '10px'
+        };
+        return div(
+            {id: 'react-root'},
+            React.createElement(headerApp,
+                                   {login: appStates.login,
+                                    onClick: this.handleClick}),
+            section({style:style}, React.createElement(route.component,
+                                              {data: route.data,
+                                               onClick: this.handleClick}))
+        );
     }
 });
 
 
-exports.createAppElement = function createAppElement(url) {
-    var route = router.resolve(url);
+exports.createAppElement = function createAppElement(url, initData) {
+    var route = router.resolve(url, initData);
     if (!route) {
-        return;
+        return Promise.reject(new Error('not found'));
     }
-    return React.createElement(App, {route: route});
+    // return route.data.then(function(res) {
+        // return res.json();
+    // }).then(function(json) {
+    return route.data.then(function(json) {
+        console.log('json', json);
+        return React.createElement(App, {route: {
+            component: route.component,
+            data: json
+        }});
+    });
 };
 
 
 
-exports.render = function render() {
-    var appElement = exports.createAppElement(window.location.pathname);
-    React.render(appElement, document.getElementById('react-container'));
+exports.render = function render(initData) {
+    var elementPromise = exports.createAppElement(window.location.pathname, initData);
+    elementPromise.then(function(appElement) {
+        React.render(appElement, document.getElementById('react-container'));
+    });
 };
