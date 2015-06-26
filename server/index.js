@@ -1,6 +1,7 @@
 'use strict';
 
 require('es6-promise').polyfill();
+global.fetch = require('node-fetch');
 
 var path = require('path'),
     fs = require('fs');
