@@ -1,5 +1,7 @@
 'use strict';
 
+// polyfill fetch
+require('whatwg-fetch');
 var config = require('./config');
 
 config.cw_base_url = '/cw';
