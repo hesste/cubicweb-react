@@ -24,12 +24,12 @@ module.exports = React.createClass({
         ev.preventDefault();
         var login = ev.target.login.value,
             pass = ev.target.pass.value;
+        var updateRoute = this.props.onClick;
         fetch('/cw/login?__login=' + encodeURI(login) +
               '&__password=' + encodeURI(pass),
               {credentials:'same-origin'}).then(function(res) {
                   appStates.login = login;
-                  window.history.pushState(null, null, '/');
-                  app.render();
+                  updateRoute(null, '/');
               }).catch(function(err) {
                   this.setState({msg: 'oups'});
               });

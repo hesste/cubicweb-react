@@ -17,16 +17,31 @@ var router = require('./router'),
 
 var App = React.createClass({
 
-    handleClick: function(ev) {
-        ev.preventDefault();
-        window.history.pushState(null, null,
-                                 ev.currentTarget.attributes.href.value);
-        exports.render();
+    getInitialState: function() {
+        return {
+            route: this.props.route
+        };
+    },
+
+    handleClick: function(ev, newPath) {
+        // if ev is null (or undefined) we expect newPath to be set
+        if (ev != null) {
+            ev.preventDefault();
+            newPath = ev.currentTarget.attributes.href.value;
+        }
+        window.history.pushState(null, null, newPath);
+        var route = router.resolve(newPath);
+        route.data.then(function(json) {
+            this.setState({ route: {
+                component: route.component,
+                data: json
+            }});
+        }.bind(this));
     },
 
     render: function render() {
-        var route = this.props.route;
-        
+        var route = this.state.route;
+
         var style = {
             marginTop: '20px',
             marginBottom: '20px',
@@ -45,23 +60,5 @@ var App = React.createClass({
         );
     }
 });
+exports.App = App;
 
-
-exports.createAppElement = function createAppElement(url, initData) {
-    var route = router.resolve(url, initData);
-    return route.data.then(function(json) {
-        return React.createElement(App, {route: {
-            component: route.component,
-            data: json
-        }, code: route.code});
-    });
-};
-
-
-
-exports.render = function render(initData) {
-    var elementPromise = exports.createAppElement(window.location.pathname, initData);
-    elementPromise.then(function(appElement) {
-        React.render(appElement, document.getElementById('react-container'));
-    });
-};
