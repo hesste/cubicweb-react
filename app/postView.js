@@ -12,11 +12,16 @@ var DOM = React.DOM,
 module.exports = React.createClass({
     render: function render() {
         var post = this.props.data[0];
+        var h1Style = {
+            fontSize: '1.5em',
+            marginBottom: '20px'
+        };
         return div(
-            null,
-            h1(null, post.title),
+            {style: {display: 'flex', flexDirection: 'column'}},
+            h1({style: h1Style}, post.title),
             p(null, post.content),
-            p(null, a({href: '/', onClick: this.props.onClick}, 'back home'))
+            p({style: {alignSelf: 'flex-end'}},
+              a({href: '/', onClick: this.props.onClick}, 'back home'))
         );
     }
 });

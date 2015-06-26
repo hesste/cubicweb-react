@@ -11,9 +11,13 @@ var DOM = React.DOM,
 
 module.exports = React.createClass({
     render: function render() {
+        var h1Style = {
+            fontSize: '1.5em',
+            marginBottom: '20px'
+        };
         return div(
             null,
-            h1(null, 'TOTO'),
+            h1({style: h1Style}, 'List of BlogEntry'),
             ul(null, this.props.data.map(function(post) {
                 return li(
                     {key: post.eid},
