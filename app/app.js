@@ -12,30 +12,11 @@ var DOM = React.DOM,
 
 var router = require('./router'),
     headerApp = require('./header'),
-    appStates = require('./states'),
-    db = require('./db');
+    appStates = require('./states');
 
 
 var App = React.createClass({
 
-    // getInitialState: function getInitialState() {
-    //     return this.props;
-    // },
-
-    // componentDidMount: function() {
-    //     window.addEventListener('popstate', this.updateUrl);
-    // },
-
-    // updateUrl: function() {
-    //     var route = router.resolve(window.location.pathname);
-    //     if (!route) {
-    //         window.alert('oups not found');
-    //     } else {
-    //         this.setState({data: route.data, component: route.compenent});
-    //     }
-    // },
-
-    // handleClick: function(ev) {},
     handleClick: function(ev) {
         ev.preventDefault();
         window.history.pushState(null, null,
@@ -71,9 +52,6 @@ exports.createAppElement = function createAppElement(url, initData) {
     if (!route) {
         return Promise.reject(new Error('not found'));
     }
-    // return route.data.then(function(res) {
-        // return res.json();
-    // }).then(function(json) {
     return route.data.then(function(json) {
         console.log('json', json);
         return React.createElement(App, {route: {

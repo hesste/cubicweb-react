@@ -12,9 +12,6 @@ var DOM = React.DOM,
     a = DOM.a;
 
 
-var router = require('./router'),
-    db = require('./db');
-
 module.exports = React.createClass({
     render: function render() {
         var style = {
