@@ -59,4 +59,10 @@ exports.resolve = function resolve(url, initData) {
             };
         }
     }
+    // Not Found
+    return {
+        data: noData().then(function(res) { return res.json();}),
+        component: require('./not-found'),
+        code: 404
+    };
 };

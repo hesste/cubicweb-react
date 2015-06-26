@@ -49,14 +49,11 @@ var App = React.createClass({
 
 exports.createAppElement = function createAppElement(url, initData) {
     var route = router.resolve(url, initData);
-    if (!route) {
-        return Promise.reject(new Error('not found'));
-    }
     return route.data.then(function(json) {
         return React.createElement(App, {route: {
             component: route.component,
             data: json
-        }});
+        }, code: route.code});
     });
 };
 

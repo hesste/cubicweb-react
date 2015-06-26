@@ -27,7 +27,7 @@ server.start(config, function otherUrlCb(req, res){
         // write dom computed by react
         html = html.replace('<!-- ici -->',
                             React.renderToString(appElement));
-        res.writeHead(200, {
+        res.writeHead(appElement.props.code || 200, {
             'Content-Length': html.length,
             'Content-Type': 'text/html'
         });
