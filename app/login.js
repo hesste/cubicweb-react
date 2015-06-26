@@ -22,20 +22,15 @@ module.exports = React.createClass({
     },
     handleSubmit: function(ev) {
         ev.preventDefault();
-        console.log('handle submit', ev);
         var login = ev.target.login.value,
             pass = ev.target.pass.value;
-        console.log('login', ev.target.login.value);
-        console.log('pass', ev.target.pass.value);
         fetch('/cw/login?__login=' + encodeURI(login) +
               '&__password=' + encodeURI(pass),
               {credentials:'same-origin'}).then(function(res) {
-                  console.log('get res');
                   appStates.login = login;
                   window.history.pushState(null, null, '/');
                   app.render();
               }).catch(function(err) {
-                  console.log('oups', err);
                   this.setState({msg: 'oups'});
               });
     },

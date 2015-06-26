@@ -53,7 +53,6 @@ exports.resolve = function resolve(url, initData) {
                      url.match(route.url));
         if (match) {
             var urlParams = Array.isArray(match) ? match.slice(1) : [];
-            console.log('initData', initData);
             return {
                 data: initData || route.data(urlParams).then(function(res) { return res.json();}),
                 component: route.component

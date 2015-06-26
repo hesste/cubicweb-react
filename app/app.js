@@ -53,7 +53,6 @@ exports.createAppElement = function createAppElement(url, initData) {
         return Promise.reject(new Error('not found'));
     }
     return route.data.then(function(json) {
-        console.log('json', json);
         return React.createElement(App, {route: {
             component: route.component,
             data: json
