@@ -16,7 +16,7 @@ var app = require('../app/app');
 
 var template = fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8');
 
-config.otherUrlCb = function otherUrlCb(req, res){
+server.start(config, function otherUrlCb(req, res){
     app.createAppElement(req.url).then(function(appElement) {
         // write initialdata into html so that on client side
         // we do not have to ask for the same data
@@ -41,9 +41,8 @@ config.otherUrlCb = function otherUrlCb(req, res){
         });
         res.end(text);
     });
-};
+});
 
-server.start(config);
 
     
 
