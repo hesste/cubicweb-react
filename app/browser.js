@@ -1,5 +1,7 @@
 'use strict';
 
+// polyfill Promise
+require('es6-promise').polyfill();
 // polyfill fetch
 require('whatwg-fetch');
 var config = require('./config');

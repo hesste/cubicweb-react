@@ -1,5 +1,7 @@
 'use strict';
 
+require('es6-promise').polyfill();
+
 var path = require('path'),
     fs = require('fs');
 var server = require('reverse-proxy'),
