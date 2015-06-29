@@ -16,6 +16,7 @@ var router = require('./router'),
 
 
 var App = React.createClass({
+    displayName: 'app',
 
     getInitialState: function() {
         return {
@@ -23,7 +24,7 @@ var App = React.createClass({
         };
     },
 
-    handleClick: function(ev, newPath) {
+    handleClick: function updateRoute(ev, newPath) {
         // if ev is null (or undefined) we expect newPath to be set
         if (ev != null) {
             ev.preventDefault();

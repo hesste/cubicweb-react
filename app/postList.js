@@ -10,6 +10,8 @@ var DOM = React.DOM,
     a = DOM.a;
 
 module.exports = React.createClass({
+    displayName: 'postList',
+
     render: function render() {
         var h1Style = {
             fontSize: '1.5em',

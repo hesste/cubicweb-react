@@ -13,6 +13,8 @@ var DOM = React.DOM,
 
 
 module.exports = React.createClass({
+    displayName: 'appHeader',
+
     render: function render() {
         var style = {
             display: 'flex',

@@ -10,6 +10,8 @@ var DOM = React.DOM,
     a = DOM.a;
 
 module.exports = React.createClass({
+    displayName: 'postView',
+
     render: function render() {
         var post = this.props.data[0];
         var h1Style = {
