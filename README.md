@@ -1,3 +1,13 @@
+
+## how to use
+
+clone this repo and then npm install dependencies. You need a running
+cubicweb-blog instance. To configure it have a look at app/config.js
+
+
+
+##Plan for future:
+
 - use iso npm package (to ease isomorphic)
 - use alt npm package (for flux implementation)
 - use Radium npm package (for inline css:
