@@ -24,6 +24,24 @@ var App = React.createClass({
         };
     },
 
+    componentDidMount: function() {
+        window.addEventListener('popstate', this.onPopState, false);
+    },
+
+    componentWillUnmount: function() {
+        window.removeEventListener('popstate', this.onPopState, false);
+    },
+
+    onPopState: function() {
+        var route = router.resolve(window.location.pathname);
+        route.data.then(function(json) {
+            this.setState({ route: {
+                component: route.component,
+                data: json
+            }});
+        }.bind(this));
+    },
+
     handleClick: function updateRoute(ev, newPath) {
         // if ev is null (or undefined) we expect newPath to be set
         if (ev != null) {
